@@ -49,7 +49,7 @@ void setup() {
   display.welcome();
   wifi.begin(device);
   sensorManager.begin(device);
-  // mobileConnection.begin(device);
+  mobileConnection.begin(device);
   serverConnection.begin(device);
 }
 

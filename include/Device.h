@@ -3,13 +3,8 @@ class Device{
 public:
   //---------------- Display
   //---------------- Size of LCD
-  const static int NUM_ROWS = 4;
+  const static int NUM_ROWS = 2;
   const static int NUM_COLS = 16;
-
-  //----------------- DEVICE META
-  //----------------- Sensors info
-  const char * SENSOR_COMBINATION = "1";
-  const char * CODE_VERSION = "1";
 
   //------------------ BLUE-TOOTH veriables
   const static int BLUETOOTH_BAUD = 9600;
@@ -20,13 +15,7 @@ public:
   const static int BLUETOOTH_BUTTON_PIN = D7;
   const static int BLUETOOTH_POWER_PIN = D8;
 
-  // PMS-3003 Sensor pins
-  const static int PMS_RX = D3;
-  const static int PMS_TX = D5;
-  const static int PMS_BAUD = 9600;
-  // DHT-22 Sensor pins
-  const static int DHT_PIN = D6;
-  const static int DHT_TYPE = DHT22;
+
 
   // LCD pins
   // SDA
@@ -61,8 +50,8 @@ Device::Device(){
   delay(500);
 
   Serial.println();
-  Serial.println("***********************");
-  Serial.println("_____      ______ _____");
+  Serial.println("************************");
+  Serial.println("______     ______  _____");
   Serial.println("|    \\       |    |   |");
   Serial.println("|     \\      |    |___|");
   Serial.println("|______\\     |    |\\");

@@ -30,10 +30,7 @@ char * StorageIO::readNextString(){
   
   while(true){
     c = EEPROM.read(i + position);
-     
-    if(c == NULL)
-      break;
-    
+    if(!c) break;
     i++;
   }
   
@@ -51,7 +48,7 @@ void StorageIO::writeNextString(String s){
   for (int i = 0; i < s.length(); i++){
    EEPROM.write(position++, s[i]);
   }
-  EEPROM.write(position++, NULL);
+  EEPROM.write(position++, 0);
   
   EEPROM.commit();
 }
