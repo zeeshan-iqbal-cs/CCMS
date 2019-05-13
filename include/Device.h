@@ -14,12 +14,13 @@ public:
   // switching
   const static int BLUETOOTH_BUTTON_PIN = D7;
   const static int BLUETOOTH_POWER_PIN = D8;
-
-
+  
+  //------------------ Sensors veriables
+  const static int TEMP_SENSOR_PIN = D3;
 
   // LCD pins
-  // SDA
-  // SCL
+  // SDA -> D2
+  // SCL -> D1
 
   /**********************************************
   *************** Functions will start **********

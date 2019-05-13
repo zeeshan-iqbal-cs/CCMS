@@ -3,24 +3,49 @@ class ServerConnection{
 private:
   String deviceId;
   const char * DEBUG_TAG = "SERVER_CONNECTION";
+  const char * FIREBASE_HOST = "internet-controled-car.firebaseio.com";
+  const char * FIREBASE_AUTH = "SsZIb57wNWlqki6tsEWJcugiKJm7Q3waEvBeTc1h";
+
 public:
   void begin(Device & device){
     this->deviceId = device.getId();
+    Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
   }
   int sendData(DataPacket & data){
     debug(DEBUG_TAG, "SENDING DATA TO SERVER");
 
-    StaticJsonBuffer<200> jsonBuffer;
-    JsonObject& jsonDataPacket  = jsonBuffer.createObject();
 
-    debug(DEBUG_TAG, "PREPAIRING JSON");
-    jsonDataPacket["deviceId"]    = deviceId;
-    jsonDataPacket["temperature"] = data.temperature;
-    String strJsonDataPacket;
-    jsonDataPacket.printTo(strJsonDataPacket);
+    //-----------------------------------------
+    //---- Creating payload to send to server
+    //-- Creating JSON Buffer
+    StaticJsonBuffer<100> jsonBuffer;  //------ Allocated buffer to pack JSON
+    
+    //-- Add sensor's data in JSON
+    JsonObject& temperatureObject = jsonBuffer.createObject();
+    temperatureObject["temprature"] = data.temperature; //-- Add temperature
+    
+    //-- Add timestamp
+    //- It will go in nested packed
+    //- Will be applied by the server
+    JsonObject& tempTime = temperatureObject.createNestedObject("timestamp");
+    tempTime[".sv"] = "timestamp";
+    
 
-    debug(DEBUG_TAG, "PACKED_DATA_PACKET", strJsonDataPacket);
-    return -1;
+    String json;
+    temperatureObject.prettyPrintTo(json);
+    debug(DEBUG_TAG, "SENDING DATA TO SERVER", "\n" + json);
+
+
+    //-----------------------------------
+    //-- Pushing data on Firebase
+    String path = Firebase.push("ccms/sensor/s1", temperatureObject);
+    if (Firebase.failed()) {
+      debug(DEBUG_TAG, "SENDING DATA TO SERVER", path + Firebase.error());
+      return -1;
+    }else{
+      debug(DEBUG_TAG, "SENDING DATA TO SERVER", "DATA PUSHED");
+      return 0;
+    }
   }
 
 };

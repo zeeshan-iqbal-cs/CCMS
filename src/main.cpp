@@ -11,6 +11,9 @@
 #include <SoftwareSerial.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+#include <FirebaseArduino.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 #include "debug.h"
 
@@ -38,8 +41,8 @@ void DELAY_SR(int t){
       device.setPassword(mobileConnection.getWifiPassword());
       device.save();
       wifi.begin(device);
-      delay(20);
     }
+    delay(20);
   }
 }
 
@@ -60,5 +63,5 @@ void loop() {
   display.wifiStatus(wifi.getStatus());
   display.data(data);
   serverConnection.sendData(data);
-  DELAY_SR(20000);
+  DELAY_SR(1000);
 }
