@@ -49,8 +49,8 @@ void DELAY_SR(int t){
 
 void setup() {
   debug("MAIN", "Entered in MAIN");
-  display.welcome();
   wifi.begin(device);
+  display.welcome();
   sensorManager.begin(device);
   mobileConnection.begin(device);
   serverConnection.begin(device);
@@ -68,4 +68,5 @@ void loop() {
   } else {
     DELAY_SR(800);
   }
+  
 }

@@ -45,7 +45,7 @@ char * StorageIO::readNextString(){
 
 void StorageIO::writeNextString(String s){
 
-  for (int i = 0; i < s.length(); i++){
+  for (unsigned int i = 0; i < s.length(); i++){
    EEPROM.write(position++, s[i]);
   }
   EEPROM.write(position++, 0);

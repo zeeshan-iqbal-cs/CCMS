@@ -14,7 +14,6 @@ public:
   int sendData(DataPacket & data){
     debug(DEBUG_TAG, "SENDING DATA TO SERVER");
 
-
     //-----------------------------------------
     //---- Creating payload to send to server
     //-- Creating JSON Buffer
@@ -30,17 +29,18 @@ public:
     JsonObject& tempTime = temperatureObject.createNestedObject("timestamp");
     tempTime[".sv"] = "timestamp";
     
-
     String json;
     temperatureObject.prettyPrintTo(json);
-    debug(DEBUG_TAG, "SENDING DATA TO SERVER", "\n" + json);
-
+    debug(DEBUG_TAG, "DATA Packet", "\n" + json);
 
     //-----------------------------------
     //-- Pushing data on Firebase
-    String path = Firebase.push("ccms/sensor/s1", temperatureObject);
+    String path = Firebase.push("ccms", temperatureObject);
+    delay(1000);
     if (Firebase.failed()) {
-      debug(DEBUG_TAG, "SENDING DATA TO SERVER", path + Firebase.error());
+      debug(DEBUG_TAG, "SENDING DATA TO SERVER", "Error!");
+      debug(DEBUG_TAG, "SEND ERROR", path);
+      debug(DEBUG_TAG, "SEND ERROR",Firebase.error());
       return -1;
     }else{
       debug(DEBUG_TAG, "SENDING DATA TO SERVER", "DATA PUSHED");
