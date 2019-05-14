@@ -6,6 +6,10 @@ public:
   const static int NUM_ROWS = 2;
   const static int NUM_COLS = 16;
 
+  //------------------ LCD pins (I2C hardware)
+  //==> SDA -> D2
+  //==> SCL -> D1
+
   //------------------ BLUE-TOOTH veriables
   const static int BLUETOOTH_BAUD = 9600;
   // communication
@@ -18,9 +22,8 @@ public:
   //------------------ Sensors veriables
   const static int TEMP_SENSOR_PIN = D3;
 
-  // LCD pins
-  // SDA -> D2
-  // SCL -> D1
+  //------------------ Buzzer Pins
+  const static int BUZZER_PIN = D5;
 
   /**********************************************
   *************** Functions will start **********

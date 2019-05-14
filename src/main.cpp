@@ -61,7 +61,11 @@ void setup() {
 void loop() {
   DataPacket data = sensorManager.read();
   display.wifiStatus(wifi.getStatus());
-  display.data(data);
-  serverConnection.sendData(data);
-  DELAY_SR(1000);
+  if (wifi.getStatus()){
+    display.data(data);
+    serverConnection.sendData(data);
+    DELAY_SR(1000);
+  } else {
+    DELAY_SR(800);
+  }
 }

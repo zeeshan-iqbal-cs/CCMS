@@ -6,7 +6,7 @@ private:
 
   unsigned short rows;
   unsigned short cols;
-
+  unsigned short buzzerPin;
 public:
   Display(Device & device);
   void welcome();
@@ -18,12 +18,15 @@ public:
 Display::Display(Device & device){
   this->rows = device.NUM_ROWS;
   this->cols = device.NUM_COLS;
+  this->buzzerPin = device.BUZZER_PIN;
   deviceId = device.getId();
   debug(DEBUG_TAG, "SET DEVICE ID", stFahion(deviceId));
 
   lcd = new LiquidCrystal_I2C(0x3F, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
   lcd->begin(rows, cols);
   debug(DEBUG_TAG, "LCD SIZE =", String(rows) + "x" +cols);
+
+  pinMode(buzzerPin, OUTPUT);
 }
 
 void Display::welcome(){
@@ -56,6 +59,12 @@ void Display::wifiStatus(bool wifiConnected){
 
   if (wifiConnected)
     lcd->print("WIFI Connected");
+  
   else lcd->print("WIFI Failed");
 
+  if (! wifiConnected){
+    digitalWrite(buzzerPin, HIGH);
+    delay(100);
+    digitalWrite(buzzerPin, LOW);
+  }
 }
