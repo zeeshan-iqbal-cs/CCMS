@@ -43,9 +43,9 @@ void MobileConnection::begin(Device & device){
   pinMode(btInput, OUTPUT);   // -- intialize pin
   digitalWrite(btInput, LOW); // -- Turn off bluetooth
 
-  pinMode(button, INPUT_PULLUP);
+  pinMode(button, INPUT);
   attachInterrupt(digitalPinToInterrupt(button),
-    M_ISR, RISING);
+    M_ISR, HIGH);
   clearConnectionRequest();
 }
 

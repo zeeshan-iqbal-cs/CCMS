@@ -30,9 +30,10 @@ Display::Display(Device & device){
 }
 
 void Display::welcome(){
-
+  lcd->setCursor(0, 0);
+  lcd->print("Device Starting");
   for (int i = 0; i < 16; i++){
-    lcd->setCursor(i, 0);
+    lcd->setCursor(i, 1);
     lcd->print('*');
     delay(200);
   }
@@ -60,9 +61,9 @@ void Display::wifiStatus(bool wifiConnected){
   if (wifiConnected)
     lcd->print("WIFI Connected");
   
-  else lcd->print("WIFI Failed");
-
-  if (! wifiConnected){
+  else {
+    lcd->clear();
+    lcd->print("WFIF Failed");
     digitalWrite(buzzerPin, HIGH);
     delay(100);
     digitalWrite(buzzerPin, LOW);

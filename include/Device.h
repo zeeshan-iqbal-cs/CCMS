@@ -71,7 +71,7 @@ Device::Device(){
   id = rom.readNextString();
   ssid = rom.readNextString();
   password = rom.readNextString();
-
+  id = "hardcode";
   debug(DEBUG_TAG, "ID", id);
   debug(DEBUG_TAG, "SSID", ssid);
   debug(DEBUG_TAG, "PASSWORD", password);
