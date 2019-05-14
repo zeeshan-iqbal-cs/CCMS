@@ -42,6 +42,7 @@ void DELAY_SR(int t){
       device.save();
       wifi.begin(device);
     }
+
     delay(20);
   }
 }

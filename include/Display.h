@@ -52,6 +52,15 @@ void Display::data(DataPacket data){
   lcd->setCursor(0,1);
   lcd->print("T = ");
   lcd->print(data.temperature);
+
+  /*
+  if (data.temperature > 25){
+    lcd->clear();
+    lcd->print("Warning");
+    digitalWrite(buzzerPin, HIGH);
+    while (true);
+  }
+  */
 }
 
 void Display::wifiStatus(bool wifiConnected){
@@ -60,10 +69,10 @@ void Display::wifiStatus(bool wifiConnected){
 
   if (wifiConnected)
     lcd->print("WIFI Connected");
-  
   else {
     lcd->clear();
     lcd->print("WFIF Failed");
+
     digitalWrite(buzzerPin, HIGH);
     delay(100);
     digitalWrite(buzzerPin, LOW);
